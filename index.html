@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Xiaoqing.G blog</title>
+  <meta name="author" content="Xiaoqing Gao">
+  
+  <meta name="description" content="STAY HUNGRY, STAY FOOLISH">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Xiaoqing.G blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Xiaoqing.G blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Xiaoqing.G blog</a></h1>
+  <h2><a href="/">STAY HUNGRY, STAY FOOLISH</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/photography">Photography</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-10-28T01:43:28.000Z"><a href="/2013/10/28/my-new-post/">Oct 28 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/10/28/my-new-post/">MapReduce与遗传算法、MapReduce与粒子群算法结合与实现</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>遗传算法（大白话解析遗传算法）：<a href="http://www.cnblogs.com/heaad/archive/2010/12/23/1914725.html" target="_blank">http://www.cnblogs.com/heaad/archive/2010/12/23/1914725.html</a><br>Java代码用遗传算法解决0-1背包：<a href="http://wenku.baidu.com/view/20beb6da6f1aff00bed51ea8.html" target="_blank">http://wenku.baidu.com/view/20beb6da6f1aff00bed51ea8.html</a> </p>
+<h2>MapReduce和遗传算法结合：（参考文献：MapReduce-GA-eScience2008）</h2>
+<p>Map——评估每个个体<br>输入： (key, value)  (个体索引, 个体)<br>输出： (key,value)  (相同默认的键值, 个体)</p>
+<p>Reduce——选择局部最优个体<br>输出： (key,value)  (个体, 1)</p>
+<p>Reduce——全局最优<br>输出： (key, value)  (最优个体,1)</p>
+<p>Coordinator——交叉、变异</p>
+<h2>二、MapReduce和粒子群算法结合：(参考文献：Parallel PSOUsing MapReduce)</h2>
+<p>Map——得到最优个体解<br>输入：(key, value)(粒子索引，粒子状态：包括相邻节点、位置坐标、速度、位置值、个人最优位置、个人最    优值、全局最优位置、全局最优值)<br>输出：(key, value) (最优粒子索引，最优粒子状态：同上)</p>
+<p>Reduce——得到最优全局解<br>输出：(key, value) (全局最优粒子索引，全局最优粒子状态：同上)</p>
+<ul>
+<li>产生初始粒子</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/10/28/my-new-post/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-15T11:13:46.000Z"><a href="/2013/06/15/log-alarm/">Jun 15 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/06/15/log-alarm/">Linux中运行python实现错误日志定时报警</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>又到了毕业季，实验室不是很忙，要给自己找点事做。于是打算从6.21开始学习python。中间又是拍毕业照又是吃散伙饭，还是赶紧写个python的小程序，免得前面看的都忘记了。</p>
+<h2>1. crontab用法</h2>
+<p>crontab命令常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。crontab文件包含送交cron守护进程的一系列作业和指令。每个用户可以拥有自己的crontab文件；同时，操作系统保存一个针对整个系统的crontab文件，该文件通常存放于/etc或者/etc之下的子目录中，而这个文件只能由系统管理员来修改。crontab文件的每一行均遵守特定的格式，由空格或tab分隔为数个领域，每个领域可以放置单一或多个数值。<br>基本格式：<br>* * * * * command<br>分 时 日 月 周 命令<br>逗号 (‘,’)分开的值，例如：“1,3,4,7,8”<br>连词符 (‘-’) 制定值的范围，例如：“1-6”，意思等同于“1,2,3,4,5,6”<br>星号 (&#39;*&#39;) 代表任何可能的值。例如，在“小时域”里的星号等于是“每一个小时”，如果在小时中使用*/1表示每小时<br>例子：<br>*/2   *   *  *   *         root     ……………    #每两分钟就执行……..<br>0 6,12,18   *   *  *     root    ……………     #每天6点、12点、18点执行……..<br>0 23-7/2  *  * *    root    ……………    #每天晚上11点到7，每隔2小时执行……..<br>0 4 1 1 *                root     ……………     #1月1日早上4点执行………</p>
+<p>
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2013/06/15/log-alarm/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+<nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/python/">python</a><small>1</small></li>
+  
+    <li><a href="/categories/云计算/">云计算</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/python/" style="font-size: NaNpx;">python</a><a href="/tags/云计算/" style="font-size: NaNpx;">云计算</a>
+  </div>
+</div>
+
+
+
+  <iframe width="272" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=zh_cn&width=272&height=550&fansRow=2&ptype=0&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1780354035&verifier=0b6bb11b&dpc=1"></iframe>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Xiaoqing Gao
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
